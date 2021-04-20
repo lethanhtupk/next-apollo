@@ -1,5 +1,6 @@
 import Continent from '../../src/components/Countinent';
 import { getContinents } from '../../src/schema/query/continent';
+import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
 
 export default function ContinentDetail({ continentCode }) {
   return (
@@ -10,19 +11,17 @@ export default function ContinentDetail({ continentCode }) {
   );
 }
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {
   const continentCode = context.params.code;
-
-  console.log(continentCode);
 
   return {
     props: {
       continentCode: continentCode,
     },
   };
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const result = await getContinents();
 
   const paths = [];
@@ -34,4 +33,4 @@ export async function getStaticPaths() {
     paths: paths,
     fallback: false,
   };
-}
+};

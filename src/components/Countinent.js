@@ -61,8 +61,6 @@ export default function Continent({ continentCode }) {
 
   const { continent: continent } = data;
 
-  console.log(data);
-
   return (
     <Grid style={{ marginTop: '20px' }} container spacing={2}>
       {continent.countries.map(({ code, name, emoji }) => (
