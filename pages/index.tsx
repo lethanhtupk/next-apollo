@@ -1,5 +1,3 @@
-// import Head from 'next/head';
-// import styles from '../styles/Home.module.css';
 import ContinentsList from '../src/components/continentsList';
 import Link from 'next/link';
 
@@ -17,6 +15,11 @@ export default function Home() {
         <Link href='/useQueryLazy'>
           <h1>
             <a>useQueryLazy</a>
+          </h1>
+        </Link>
+        <Link href='/networking'>
+          <h1>
+            <a>Networking</a>
           </h1>
         </Link>
       </div>

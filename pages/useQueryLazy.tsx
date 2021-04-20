@@ -51,7 +51,7 @@ export default function ContinentsList() {
       </Button>
       {data && data.continents && (
         <Grid style={{ marginTop: '20px' }} container spacing={2}>
-          {data.continents.map(({ code, name }) => (
+          {data.continents.map(({ code, name }: { code: string; name: string }) => (
             <Grid item xs={3} key={code}>
               <Card className={classes.root}>
                 <CardContent>

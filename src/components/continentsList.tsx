@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import { Link } from 'next/link';
+import Link from 'next/link';
 
 const useStyles = makeStyles({
   root: {
@@ -27,56 +27,43 @@ const useStyles = makeStyles({
   },
 });
 
-const GET_CONTINENT = gql`
-  query getContinent($code: ID!) {
-    continent(code: $code) {
+const GET_CONTINENTS = gql`
+  query getContinents {
+    continents {
       code
       name
-      countries {
-        code
-        name
-        native
-        phone
-        capital
-        currency
-        emoji
-        emojiU
-        states {
-          code
-          name
-        }
-      }
     }
   }
 `;
 
-export default function Continent({ continentCode }) {
+export default function ContinentsList() {
   const classes = useStyles();
-  const { loading, error, data } = useQuery(GET_CONTINENT, {
-    variables: { code: continentCode },
-  });
+  const { loading, error, data } = useQuery(GET_CONTINENTS);
 
-  if (loading) return <div>Loading data</div>;
-  if (error) return <div>Error occurs when loading data</div>;
+  if (error) {
+    return <div>Error while loading continents data</div>;
+  }
+  if (loading) {
+    return <div>Loading</div>;
+  }
 
-  const { continent: continent } = data;
+  const { continents: continents } = data;
 
   return (
     <Grid style={{ marginTop: '20px' }} container spacing={2}>
-      {continent.countries.map(({ code, name, emoji }) => (
-        <Grid item xs={4} key={ClipboardEvent} key={code}>
+      {continents.map(({ code, name }: { code: string; name: string }) => (
+        <Grid item xs={3} key={code}>
           <Card className={classes.root}>
             <CardContent>
               <Typography className={classes.pos} color='textSecondary'>
-                {emoji}
+                {code}
               </Typography>
               <Typography className={classes.title} color='textPrimary' gutterBottom>
                 {name}
               </Typography>
             </CardContent>
             <Button color='primary' variant='contained'>
-              Detail
-              {/* <Link href={`/continents/${code}`}>Detail</Link> */}
+              <Link href={`/continents/${code}`}>List Countries</Link>
             </Button>
           </Card>
         </Grid>

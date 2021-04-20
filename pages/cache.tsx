@@ -81,7 +81,7 @@ export default function Cache() {
         then back to the previous page, you can realize that Nextjs using data from cache, so there isn't a call to API
       </p>
       <Grid style={{ marginTop: '20px' }} container spacing={2}>
-        {continents.map(({ code, name }) => (
+        {continents.map(({ code, name }: { code: string; name: string }) => (
           <Grid item xs={3} key={code}>
             <Card className={classes.root}>
               <CardContent>

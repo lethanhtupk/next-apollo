@@ -31,7 +31,7 @@ export async function getContinents() {
   return result?.data.continents;
 }
 
-export async function getContinent(continentCode) {
+export async function getContinent(continentCode: String) {
   const result = await initializeApollo().query({
     query: CONTINENT_QUERY,
     variables: { continentCode },
